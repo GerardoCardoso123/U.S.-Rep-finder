@@ -40,7 +40,7 @@ h1, h2, h3 {
 
 /* Cards and content containers */
 div[data-testid="stVerticalBlockBorderWrapper"] {
-    background-color: white;
+    background-color: d7e3ff;
     border-radius: 12px;
 }
 
