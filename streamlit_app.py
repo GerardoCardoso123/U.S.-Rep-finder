@@ -2,13 +2,14 @@ import requests
 import streamlit as st
 
 st.set_page_config(page_title="U.S. Representative Finder")
+
 API_URL = "https://api.5calls.org/v1/representatives"
 
 st.title("U.S. Representative Finder")
-st.write("Find your U.S. House Representative and Senators.")
+st.write("Find your U.S. House representative and senators.")
 
 address = st.text_input(
-    "Enter your address",
+    "Enter your U.S. address",
     placeholder="Street address, city, state, ZIP code"
 )
 
@@ -50,54 +51,25 @@ if st.button("Find My Representatives"):
 
                         reps = data.get("representatives", [])
 
-if reps:
-    for rep in reps:
-        with st.container(border=True):
-            photo = (
-                rep.get("photoURL")
-                or rep.get("photo_url")
-                or rep.get("image")
-            )
+                        if reps:
+                            for rep in reps:
+                                with st.container(border=True):
+                                    name = rep.get("name", "Unknown")
+                                    office = rep.get("area", "Unknown")
+                                    district = rep.get("district")
+                                    
+                                    st.subheader(name)
+                                    st.write("**Party:**", rep.get("party", "Unknown"))
+                                    st.write("**Office:**", office)
+                                    
+                                    if district is not None:
+                                        st.write(f"**District:** {district}")
 
-            col1, col2 = st.columns([1, 3])
+                                    if rep.get("district") is not None:
+                                        st.write("**District:**", rep["district"])
 
-            with col1:
-                if photo:
-                    st.image(photo, width=130)
-                else:
-                    st.caption("Photo unavailable")
-
-            with col2:
-                name = rep.get("name", "Unknown")
-                party = rep.get("party", "Unknown")
-                office = rep.get("area", "Unknown")
-
-                st.subheader(name)
-                st.write(f"**Party:** {party}")
-                st.write(f"**Office:** {office}")
-
-                if "house" in office.lower():
-                    district = rep.get("district")
-
-                    if district is None:
-                        district = data.get("district")
-
-                    if district is not None:
-                        st.write(f"**Congressional District:** {district}")
-                    else:
-                        st.write("**Congressional District:** Not provided")
-
-                elif "senate" in office.lower():
-                    st.write("**District:** Statewide")
-
-                if rep.get("url"):
-                    st.link_button(
-                        "Official Website",
-                        rep["url"]
-                    )
-else:
-    st.info("No representatives found.")
-
+                                    if rep.get("url"):
+                                        st.link_button("Official Website", rep["url"])
                         else:
                             st.info("No representatives found.")
 
