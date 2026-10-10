@@ -1,0 +1,101 @@
+import requests
+
+API_TOKEN = "f75ea9aec2ff88f32b433843"
+
+API_URL = "https://api.5calls.org/v1/representatives"
+
+
+def find_representatives(address):
+    headers = {
+        "X-5Calls-Token": API_TOKEN
+    }
+
+    params = {
+        "location": address,
+        "areas": "US House,US Senate"
+    }
+
+    try:
+        response = requests.get(
+            API_URL,
+            headers=headers,
+            params=params,
+            timeout=10
+        )
+
+        if response.status_code != 200:
+            print("\nAPI Error:")
+            print(response.text)
+            return
+
+        data = response.json()
+
+        if "error" in data:
+            print("\nError:", data["error"])
+            return
+
+        print("\n" + "=" * 50)
+        print("YOUR U.S. REPRESENTATIVES")
+        print("=" * 50)
+
+        print(f"\nLocation: {data.get('location', 'Unknown')}")
+        print(f"State: {data.get('state', 'Unknown')}")
+        print(f"Congressional District: {data.get('district', 'Unknown')}")
+
+        if data.get("lowAccuracy"):
+            print("\nWARNING: This location may have low accuracy.")
+
+        representatives = data.get("representatives", [])
+
+        if not representatives:
+            print("\nNo representatives found.")
+            return
+
+        for rep in representatives:
+
+            print("\n" + "-" * 50)
+
+            print(f"Name:   {rep.get('name', 'Unknown')}")
+            print(f"Party:  {rep.get('party', 'Unknown')}")
+            print(f"Office: {rep.get('area', 'Unknown')}")
+
+            if rep.get("district") is not None:
+                print(f"District: {rep.get('district')}")
+
+            if rep.get("url"):
+                print(f"Website: {rep.get('url')}")
+
+        print("\n" + "=" * 50)
+
+    except requests.exceptions.Timeout:
+        print("\nThe request timed out.")
+
+    except requests.exceptions.ConnectionError:
+        print("\nCould not connect to the 5 Calls API.")
+
+    except requests.exceptions.RequestException as e:
+        print("\nRequest error:", e)
+
+    except ValueError:
+        print("\nThe API returned invalid JSON.")
+
+
+def main():
+
+    print("=" * 50)
+    print("U.S. REPRESENTATIVE FINDER")
+    print("=" * 50)
+
+    address = input("\nEnter your U.S. address: ")
+
+    if not address.strip():
+        print("Please enter an address.")
+        return
+
+    print("\nSearching...")
+
+    find_representatives(address)
+
+
+if __name__ == "__main__":
+    main()
