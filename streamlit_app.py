@@ -6,7 +6,6 @@ st.set_page_config(page_title="U.S. Representative Finder")
 API_URL = "https://api.5calls.org/v1/representatives"
 
 st.title("U.S. Representative Finder")
-st.write("Find your U.S. House Representative and Senators.")
 
 address = st.text_input(
     "Enter your address",
@@ -54,16 +53,9 @@ if st.button("Find My Representatives"):
                         if reps:
                             for rep in reps:
                                 with st.container(border=True):
-                                    name = rep.get("name", "Unknown")
-                                    office = rep.get("area", "Unknown")
-                                    district = rep.get("district")
-                                    
-                                    st.subheader(name)
+                                    st.subheader(rep.get("name", "Unknown"))
                                     st.write("**Party:**", rep.get("party", "Unknown"))
-                                    st.write("**Office:**", office)
-                                    
-                                    if district is not None:
-                                        st.write(f"**District:** {district}")
+                                    st.write("**Office:**", rep.get("area", "Unknown"))
 
                                     if rep.get("district") is not None:
                                         st.write("**District:**", rep["district"])
