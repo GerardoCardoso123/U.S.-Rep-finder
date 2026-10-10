@@ -8,16 +8,13 @@ st.set_page_config(
 )
 st.markdown("""
 <style>
-/* Main page background */
 .stApp {
     background-color: d7e3ff;
 }
 
-/* Main title and headings */
 h1, h2, h3 {
     color: #102A56 !important;
 }
-/* Buttons */
 .stButton > button {
     background-color: #bd1313;
     color: white;
@@ -26,27 +23,31 @@ h1, h2, h3 {
     padding: 0.65rem 1.2rem;
     font-weight: 600;
 }
-/* Button hover effect */
 .stButton > button:hover {
     background-color: #102A56;
     color: white;
     border: 1px solid white;
 }
 
-/* Input fields */
 .stTextInput input {
     border-radius: 8px;
 }
 
-/* Cards and content containers */
 div[data-testid="stVerticalBlockBorderWrapper"] {
     background-color: d7e3ff;
     border-radius: 12px;
 }
 
-/* Sidebar */
 section[data-testid="stSidebar"] {
     background-color: #102A56;
+
+div[data-testid="stVerticalBlockBorderWrapper"] {
+    background-color: #d7e3ff;
+    border-radius: 14px;
+    padding: 15px;
+    box-shadow: 0 4px 12px rgba(16, 42, 86, 0.15);
+}
+
 }
 </style>
 """, unsafe_allow_html=True)
