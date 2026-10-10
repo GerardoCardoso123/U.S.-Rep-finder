@@ -1,6 +1,59 @@
 import requests
 import streamlit as st
 
+st.set_page_config(
+    page_title="Find My Reps",
+    page_icon="🇺🇸",
+    layout="centered"
+)
+st.markdown("""
+<style>
+/* Main page background */
+.stApp {
+    background-color: d7e3ff;
+}
+
+/* Main title and headings */
+h1, h2, h3 {
+    color: #bd1313 !important;
+}
+/* Buttons */
+.stButton > button {
+    background-color: #bd1313;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 0.65rem 1.2rem;
+    font-weight: 600;
+}
+/* Button hover effect */
+.stButton > button:hover {
+    background-color: #102A56;
+    color: white;
+    border: 1px solid white;
+}
+
+/* Input fields */
+.stTextInput input {
+    border-radius: 8px;
+}
+
+/* Cards and content containers */
+div[data-testid="stVerticalBlockBorderWrapper"] {
+    background-color: white;
+    border-radius: 12px;
+}
+
+/* Sidebar */
+section[data-testid="stSidebar"] {
+    background-color: #102A56;
+}
+</style>
+""", unsafe_allow_html=True)
+
+
+
+
 st.set_page_config(page_title="U.S. Representative Finder")
 
 API_URL = "https://api.5calls.org/v1/representatives"
