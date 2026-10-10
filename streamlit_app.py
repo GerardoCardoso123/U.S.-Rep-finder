@@ -41,13 +41,6 @@ div[data-testid="stVerticalBlockBorderWrapper"] {
 section[data-testid="stSidebar"] {
     background-color: #102A56;
 
-div[data-testid="stVerticalBlockBorderWrapper"] {
-    background-color: #d7e3ff;
-    border-radius: 14px;
-    padding: 15px;
-    box-shadow: 0 4px 12px rgba(16, 42, 86, 0.15);
-}
-
 }
 </style>
 """, unsafe_allow_html=True)
