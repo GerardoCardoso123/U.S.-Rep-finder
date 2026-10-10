@@ -15,7 +15,7 @@ st.markdown("""
 
 /* Main title and headings */
 h1, h2, h3 {
-    color: #bd1313 !important;
+    color: #102A56 !important;
 }
 /* Buttons */
 .stButton > button {
