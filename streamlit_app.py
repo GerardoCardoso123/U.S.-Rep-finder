@@ -6,10 +6,10 @@ st.set_page_config(page_title="U.S. Representative Finder")
 API_URL = "https://api.5calls.org/v1/representatives"
 
 st.title("U.S. Representative Finder")
-st.write("Find your U.S. House representative and senators.")
+st.write("Find your U.S. House Representative and Senators.")
 
 address = st.text_input(
-    "Enter your U.S. address",
+    "Enter your address",
     placeholder="Street address, city, state, ZIP code"
 )
 
