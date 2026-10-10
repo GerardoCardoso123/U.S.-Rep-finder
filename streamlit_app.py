@@ -49,11 +49,6 @@ if st.button("Find My Representatives"):
                         )
 
                         reps = data.get("representatives", [])
-try:
-    reps = data.get("representatives", [])
-except Exception as e:
-    st.error(f"An error occured: {e}")
-    reps = []
 
 if reps:
     for rep in reps:
