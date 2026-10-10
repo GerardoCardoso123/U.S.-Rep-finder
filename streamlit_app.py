@@ -50,18 +50,55 @@ if st.button("Find My Representatives"):
 
                         reps = data.get("representatives", [])
 
-                        if reps:
-                            for rep in reps:
-                                with st.container(border=True):
-                                    st.subheader(rep.get("name", "Unknown"))
-                                    st.write("**Party:**", rep.get("party", "Unknown"))
-                                    st.write("**Office:**", rep.get("area", "Unknown"))
+                       
+if reps:
+    for rep in reps:
+        with st.container(border=True):
+            photo = (
+                rep.get("photoURL")
+                or rep.get("photo_url")
+                or rep.get("image")
+            )
 
-                                    if rep.get("district") is not None:
-                                        st.write("**District:**", rep["district"])
+            col1, col2 = st.columns([1, 3])
 
-                                    if rep.get("url"):
-                                        st.link_button("Official Website", rep["url"])
+            with col1:
+                if photo:
+                    st.image(photo, width=130)
+                else:
+                    st.caption("Photo unavailable")
+
+            with col2:
+                name = rep.get("name", "Unknown")
+                party = rep.get("party", "Unknown")
+                office = rep.get("area", "Unknown")
+
+                st.subheader(name)
+                st.write(f"**Party:** {party}")
+                st.write(f"**Office:** {office}")
+
+                if "house" in office.lower():
+                    district = rep.get("district")
+
+                    if district is None:
+                        district = data.get("district")
+
+                    if district is not None:
+                        st.write(f"**Congressional District:** {district}")
+                    else:
+                        st.write("**Congressional District:** Not provided")
+
+                elif "senate" in office.lower():
+                    st.write("**District:** Statewide")
+
+                if rep.get("url"):
+                    st.link_button(
+                        "Official Website",
+                        rep["url"]
+                    )
+else:
+    st.info("No representatives found.")
+
                         else:
                             st.info("No representatives found.")
 
