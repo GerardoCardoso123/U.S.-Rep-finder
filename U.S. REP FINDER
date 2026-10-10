@@ -52,37 +52,18 @@ def find_representatives(address):
             return
 
         for rep in representatives:
-            print("\n" + "-" * 50)
-        
-            name = rep.get("name", "Unknown")
-            party = rep.get("party", "Unknown")
-            office = rep.get("area", "Unknown")
-            district = rep.get("district")
-            print(f"Name:   {name}")
-            print(f"Party:  {party}")
-            print(f"Office: {office}")
-        
-            if district is not None:
-                print(f"District: {district}")
-            elif "Senate" in str(office):
-                print("District: Statewide (U.S. Senate)")
-        
-            if rep.get("url"):
-                print(f"Website: {rep['url']}")
-        
-            # Check whether the API supplies a representative photo
-            photo = (
-                rep.get("photo_url")
-                or rep.get("image_url")
-                or rep.get("photo")
-                or rep.get("image")
-            )
-        
-            if photo:
-                print(f"Photo: {photo}")
-            else:
-                print("Photo: No photo URL supplied by the API")
 
+            print("\n" + "-" * 50)
+
+            print(f"Name:   {rep.get('name', 'Unknown')}")
+            print(f"Party:  {rep.get('party', 'Unknown')}")
+            print(f"Office: {rep.get('area', 'Unknown')}")
+
+            if rep.get("district") is not None:
+                print(f"District: {rep.get('district')}")
+
+            if rep.get("url"):
+                print(f"Website: {rep.get('url')}")
 
         print("\n" + "=" * 50)
 
